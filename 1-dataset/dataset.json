@@ -1,0 +1,622 @@
+{
+  "dataset": "liqueurs_30",
+  "version": "1.0",
+  "n_records": 30,
+  "abv_class_rules": {
+    "слабоалкогольный": "15 <= abv_pct < 20",
+    "средний": "20 <= abv_pct < 30",
+    "крепкий": "abv_pct >= 30",
+    "note": "EU liqueur floor is 15% ABV"
+  },
+  "fields": {
+    "bitter": "boolean: pronounced structural bitterness",
+    "wood_contact": "boolean: wood contact during production (barrel-aged liqueur or defining aged base spirit)",
+    "abv_pct": "number, % ABV",
+    "sugar_gpl": "number, grams of invert sugar per litre",
+    "volume_l": "number, typical bottle litres",
+    "country": "string, country of production",
+    "taste": "hierarchical taxonomy L1/L2/L3 + id_path"
+  },
+  "records": [
+    {
+      "id": "L01",
+      "name": "Bols Crème de Menthe Green",
+      "producer": "Lucas Bols",
+      "country": "Нидерланды",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 24.0,
+      "abv_class": "средний",
+      "sugar_gpl": 400,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Травяные",
+        "l2": "Однотравные",
+        "l3": "Мятные",
+        "id_path": "H-S-M"
+      },
+      "source_quality": "literature",
+      "notes": "Эталон однотравной мяты. Сахар crème-уровня (≥250 г/л). Горечь ментола не считается «выраженной горечью» в смысле bitter=1."
+    },
+    {
+      "id": "L02",
+      "name": "Génépi des Pères Chartreux",
+      "producer": "Chartreuse Diffusion",
+      "country": "Франция",
+      "bitter": true,
+      "wood_contact": false,
+      "abv_pct": 40.0,
+      "abv_class": "крепкий",
+      "sugar_gpl": 200,
+      "volume_l": 0.5,
+      "taste": {
+        "l1": "Травяные",
+        "l2": "Однотравные",
+        "l3": "Полынные",
+        "id_path": "H-S-W"
+      },
+      "source_quality": "estimate",
+      "notes": "Альпийская полынь Artemisia genipi. Ликёр, а не абсент: закрывает лист «полынные» без 60–70% absinthe. Сахар оценка по стилю."
+    },
+    {
+      "id": "L03",
+      "name": "Jägermeister",
+      "producer": "Mast-Jägermeister",
+      "country": "Германия",
+      "bitter": true,
+      "wood_contact": false,
+      "abv_pct": 35.0,
+      "abv_class": "крепкий",
+      "sugar_gpl": 136,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Травяные",
+        "l2": "Смесь трав",
+        "l3": "Кройтер",
+        "id_path": "H-M-K"
+      },
+      "source_quality": "spec",
+      "notes": "Канонический kräuterlikör. 56 трав. Горечь есть, но мягче амаро. Бочковой выдержки нет."
+    },
+    {
+      "id": "L04",
+      "name": "Chartreuse Verte",
+      "producer": "Pères Chartreux",
+      "country": "Франция",
+      "bitter": true,
+      "wood_contact": false,
+      "abv_pct": 55.0,
+      "abv_class": "крепкий",
+      "sugar_gpl": 250,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Травяные",
+        "l2": "Смесь трав",
+        "l3": "Кройтер",
+        "id_path": "H-M-K"
+      },
+      "source_quality": "literature",
+      "notes": "Монастырский multi-herb на 130 растениях. Классифицирован как кройтер (альпийско-монастырский mix), не как амаро. Крепкий край шкалы."
+    },
+    {
+      "id": "L05",
+      "name": "Amaro Averna",
+      "producer": "Averna / Campari Group",
+      "country": "Италия",
+      "bitter": true,
+      "wood_contact": true,
+      "abv_pct": 29.0,
+      "abv_class": "средний",
+      "sugar_gpl": 230,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Травяные",
+        "l2": "Смесь трав",
+        "l3": "Амаро",
+        "id_path": "H-M-A"
+      },
+      "source_quality": "literature",
+      "notes": "Сицилийский амаро. Часть тиража дозревает в дубе — wood_contact=1. Карамель, цедра, мягкая горечь."
+    },
+    {
+      "id": "L06",
+      "name": "Fernet-Branca",
+      "producer": "Fratelli Branca",
+      "country": "Италия",
+      "bitter": true,
+      "wood_contact": false,
+      "abv_pct": 39.0,
+      "abv_class": "крепкий",
+      "sugar_gpl": 80,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Травяные",
+        "l2": "Смесь трав",
+        "l3": "Амаро",
+        "id_path": "H-M-A"
+      },
+      "source_quality": "literature",
+      "notes": "Агрессивный амаро. Сахар около 80 г/л — допустимо для полынных/генциановых ликёров (EU порог 80, не 100). Максимальный bitter=1."
+    },
+    {
+      "id": "L07",
+      "name": "Amaro Montenegro",
+      "producer": "Montenegro",
+      "country": "Италия",
+      "bitter": true,
+      "wood_contact": false,
+      "abv_pct": 23.0,
+      "abv_class": "средний",
+      "sugar_gpl": 220,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Травяные",
+        "l2": "Смесь трав",
+        "l3": "Амаро",
+        "id_path": "H-M-A"
+      },
+      "source_quality": "estimate",
+      "notes": "«Лёгкий» амаро: ваниль, роза, горький апельсин. Нужен, чтобы амаро не выглядели одним Fernet."
+    },
+    {
+      "id": "L08",
+      "name": "Cointreau",
+      "producer": "Rémy Cointreau",
+      "country": "Франция",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 40.0,
+      "abv_class": "крепкий",
+      "sugar_gpl": 200,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Цитрусовые",
+        "l3": "Цедровые",
+        "id_path": "F-C-Z"
+      },
+      "source_quality": "literature",
+      "notes": "Эталон triple sec на смеси сладкой и горькой апельсиновой цедры. Горькая цедра ≠ bitter=1."
+    },
+    {
+      "id": "L09",
+      "name": "Villa Massa Limoncello",
+      "producer": "Villa Massa",
+      "country": "Италия",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 30.0,
+      "abv_class": "крепкий",
+      "sugar_gpl": 320,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Цитрусовые",
+        "l3": "Цедровые",
+        "id_path": "F-C-Z"
+      },
+      "source_quality": "estimate",
+      "notes": "Сфузато-лимоны Сорренто, настойка цедры. Сахар высокий, как у большинства лимончелло."
+    },
+    {
+      "id": "L10",
+      "name": "Grand Marnier Cordon Rouge",
+      "producer": "Grand Marnier",
+      "country": "Франция",
+      "bitter": false,
+      "wood_contact": true,
+      "abv_pct": 40.0,
+      "abv_class": "крепкий",
+      "sugar_gpl": 214,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Цитрусовые",
+        "l3": "Цедровые",
+        "id_path": "F-C-Z"
+      },
+      "source_quality": "literature",
+      "notes": "Цедра + коньяк. Дерево приходит из выдержанной базы, не из настойки апельсина."
+    },
+    {
+      "id": "L11",
+      "name": "Giffard Pamplemousse",
+      "producer": "Giffard",
+      "country": "Франция",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 16.0,
+      "abv_class": "слабоалкогольный",
+      "sugar_gpl": 260,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Цитрусовые",
+        "l3": "Соковые",
+        "id_path": "F-C-J"
+      },
+      "source_quality": "estimate",
+      "notes": "Грейпфрут как сок/мякоть, не как парфюм цедры. Закрывает редкий лист «соковые»."
+    },
+    {
+      "id": "L12",
+      "name": "Lejay Crème de Cassis de Dijon",
+      "producer": "Lejay Lagoute",
+      "country": "Франция",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 20.0,
+      "abv_class": "средний",
+      "sugar_gpl": 400,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Ягодные",
+        "l3": "Тёмноягодные",
+        "id_path": "F-B-D"
+      },
+      "source_quality": "literature",
+      "notes": "Эталон кассиса. Crème ⇒ сахар ≥250 г/л, обычно ближе к 400. Танин ягоды есть, структурной горечи нет."
+    },
+    {
+      "id": "L13",
+      "name": "Ponche Crema",
+      "producer": "Ponche Crema / various",
+      "country": "Венесуэла",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 15.0,
+      "abv_class": "слабоалкогольный",
+      "sugar_gpl": 240,
+      "volume_l": 0.75,
+      "taste": {
+        "l1": "Эмульсивные",
+        "l2": "Яичные",
+        "l3": "Пряный эггног",
+        "id_path": "E-E-S"
+      },
+      "source_quality": "estimate",
+      "notes": "Венесуэльский яично-молочный ликёр со специями и ромовой базой. Закрывает лист «пряный эггног». ABV у края ликёрного минимума 15%."
+    },
+    {
+      "id": "L14",
+      "name": "Giffard Crème de Fraise des Bois",
+      "producer": "Giffard",
+      "country": "Франция",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 16.0,
+      "abv_class": "слабоалкогольный",
+      "sugar_gpl": 380,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Ягодные",
+        "l3": "Светлоягодные",
+        "id_path": "F-B-L"
+      },
+      "source_quality": "estimate",
+      "notes": "Земляника. Светлый ягодный лист без танина смородины."
+    },
+    {
+      "id": "L15",
+      "name": "Giffard Abricot du Roussillon",
+      "producer": "Giffard",
+      "country": "Франция",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 25.0,
+      "abv_class": "средний",
+      "sugar_gpl": 280,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Косточковые",
+        "l3": "Абрикосовые",
+        "id_path": "F-S-A"
+      },
+      "source_quality": "estimate",
+      "notes": "Абрикос Руссильона. Не путать с amaretto: здесь фрукт, не бензальдегид косточки."
+    },
+    {
+      "id": "L16",
+      "name": "Archers Peach Schnapps",
+      "producer": "Bacardi",
+      "country": "Великобритания",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 18.0,
+      "abv_class": "слабоалкогольный",
+      "sugar_gpl": 280,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Косточковые",
+        "l3": "Персиковые",
+        "id_path": "F-S-P"
+      },
+      "source_quality": "estimate",
+      "notes": "Персиковый schnapps. Слабоалкогольный, высокий сахар, нулевая горечь и дерево."
+    },
+    {
+      "id": "L17",
+      "name": "Malibu Original",
+      "producer": "Pernod Ricard",
+      "country": "Барбадос",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 21.0,
+      "abv_class": "средний",
+      "sugar_gpl": 180,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Тропические",
+        "l3": "Кокосовые",
+        "id_path": "F-T-C"
+      },
+      "source_quality": "literature",
+      "notes": "Кокос на ромовой базе. Это не сливочная эмульсия: жировой фазы молока нет, поэтому фруктовый лист, не эмульсивный."
+    },
+    {
+      "id": "L18",
+      "name": "Midori",
+      "producer": "Suntory",
+      "country": "Япония",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 20.0,
+      "abv_class": "средний",
+      "sugar_gpl": 300,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Тропические",
+        "l3": "Дынно-банановые",
+        "id_path": "F-T-M"
+      },
+      "source_quality": "estimate",
+      "notes": "Мускусная дыня. Закрывает «дынную» половину тропического листа."
+    },
+    {
+      "id": "L19",
+      "name": "Bols Crème de Banane",
+      "producer": "Lucas Bols",
+      "country": "Нидерланды",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 17.0,
+      "abv_class": "слабоалкогольный",
+      "sugar_gpl": 400,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Фруктовые",
+        "l2": "Тропические",
+        "l3": "Дынно-банановые",
+        "id_path": "F-T-M"
+      },
+      "source_quality": "estimate",
+      "notes": "Банановая половина того же листа. Crème-сахар, слабоалкогольный."
+    },
+    {
+      "id": "L20",
+      "name": "Disaronno Originale",
+      "producer": "Illva Saronno",
+      "country": "Италия",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 28.0,
+      "abv_class": "средний",
+      "sugar_gpl": 300,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Ореховые",
+        "l2": "Ядра косточковых",
+        "l3": "Горько-марципановые",
+        "id_path": "N-K-B"
+      },
+      "source_quality": "literature",
+      "notes": "Профиль абрикосовой косточки / марципана. Горькое ядро ≠ bitter=1: это аромат бензальдегида, не генциан."
+    },
+    {
+      "id": "L21",
+      "name": "Luxardo Amaretto di Saschira",
+      "producer": "Luxardo",
+      "country": "Италия",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 28.0,
+      "abv_class": "средний",
+      "sugar_gpl": 280,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Ореховые",
+        "l2": "Ядра косточковых",
+        "l3": "Сладко-миндальные",
+        "id_path": "N-K-S"
+      },
+      "source_quality": "estimate",
+      "notes": "Более «сладкий миндаль», чем Disaronno. Нужен, чтобы миндальная ветка имела оба L3."
+    },
+    {
+      "id": "L22",
+      "name": "Frangelico",
+      "producer": "Frangelico / Gruppo Campari",
+      "country": "Италия",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 20.0,
+      "abv_class": "средний",
+      "sugar_gpl": 240,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Ореховые",
+        "l2": "Скорлупные",
+        "l3": "Фундучные",
+        "id_path": "N-H-F"
+      },
+      "source_quality": "literature",
+      "notes": "Фундук Пьемонта + ваниль и какао-намёк. Бутылка-монах не означает бочку."
+    },
+    {
+      "id": "L23",
+      "name": "Nocino Riserva",
+      "producer": "Antica Distilleria Quaglia",
+      "country": "Италия",
+      "bitter": true,
+      "wood_contact": true,
+      "abv_pct": 30.0,
+      "abv_class": "крепкий",
+      "sugar_gpl": 220,
+      "volume_l": 0.5,
+      "taste": {
+        "l1": "Ореховые",
+        "l2": "Скорлупные",
+        "l3": "Грецкоореховые",
+        "id_path": "N-H-W"
+      },
+      "source_quality": "estimate",
+      "notes": "Зелёный грецкий орех. Танин даёт bitter=1. Riserva часто видит дуб — wood_contact=1."
+    },
+    {
+      "id": "L24",
+      "name": "Mr Black Cold Brew",
+      "producer": "Mr Black",
+      "country": "Австралия",
+      "bitter": true,
+      "wood_contact": false,
+      "abv_pct": 25.0,
+      "abv_class": "средний",
+      "sugar_gpl": 160,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Обжаренные",
+        "l2": "Кофейные",
+        "l3": "Сухие",
+        "id_path": "R-F-D"
+      },
+      "source_quality": "estimate",
+      "notes": "Cold brew, меньше сахара, чем у Kahlúa. Горечь эспрессо = bitter=1. Ромовой сладости нет."
+    },
+    {
+      "id": "L25",
+      "name": "Kahlúa",
+      "producer": "Pernod Ricard",
+      "country": "Мексика",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 16.0,
+      "abv_class": "слабоалкогольный",
+      "sugar_gpl": 393,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Обжаренные",
+        "l2": "Кофейные",
+        "l3": "Ромовые",
+        "id_path": "R-F-R"
+      },
+      "source_quality": "spec",
+      "notes": "Кофе + ром + высокий сахар. Горечь кофе перекрыта патокой, поэтому bitter=0. Есть версии 20%, берём массовый 16%."
+    },
+    {
+      "id": "L26",
+      "name": "Bols Crème de Cacao Brown",
+      "producer": "Lucas Bols",
+      "country": "Нидерланды",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 24.0,
+      "abv_class": "средний",
+      "sugar_gpl": 395,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Обжаренные",
+        "l2": "Какао",
+        "l3": "Тёмный шоколад",
+        "id_path": "R-C-K"
+      },
+      "source_quality": "literature",
+      "notes": "Тёмный какао. Лёгкая бобовая горчинка есть, но не структурная — bitter=0."
+    },
+    {
+      "id": "L27",
+      "name": "Bols Crème de Cacao White",
+      "producer": "Lucas Bols",
+      "country": "Нидерланды",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 24.0,
+      "abv_class": "средний",
+      "sugar_gpl": 395,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Обжаренные",
+        "l2": "Какао",
+        "l3": "Белый шоколад",
+        "id_path": "R-C-W"
+      },
+      "source_quality": "literature",
+      "notes": "Белый какао: масло какао + ваниль, без тёмного боба. Тот же сахар, другой L3."
+    },
+    {
+      "id": "L28",
+      "name": "Baileys Original Irish Cream",
+      "producer": "Diageo",
+      "country": "Ирландия",
+      "bitter": false,
+      "wood_contact": true,
+      "abv_pct": 17.0,
+      "abv_class": "слабоалкогольный",
+      "sugar_gpl": 224,
+      "volume_l": 1.0,
+      "taste": {
+        "l1": "Эмульсивные",
+        "l2": "Сливочные",
+        "l3": "Зерновые сливки",
+        "id_path": "E-C-G"
+      },
+      "source_quality": "literature",
+      "notes": "Эталон зерновых сливок. Дерево = выдержанный ирландский виски в базе. Бутылка 1,0 л — частый розлив."
+    },
+    {
+      "id": "L29",
+      "name": "Amarula",
+      "producer": "Amarula / Distell",
+      "country": "ЮАР",
+      "bitter": false,
+      "wood_contact": true,
+      "abv_pct": 17.0,
+      "abv_class": "слабоалкогольный",
+      "sugar_gpl": 200,
+      "volume_l": 0.75,
+      "taste": {
+        "l1": "Эмульсивные",
+        "l2": "Сливочные",
+        "l3": "Фруктовые сливки",
+        "id_path": "E-C-F"
+      },
+      "source_quality": "estimate",
+      "notes": "Сливки + плод марулы. База — выдержанный фруктовый дистиллят, поэтому wood_contact=1. Не «неирландский Baileys», а другой L3."
+    },
+    {
+      "id": "L30",
+      "name": "Warninks Advocaat",
+      "producer": "Warninks",
+      "country": "Нидерланды",
+      "bitter": false,
+      "wood_contact": false,
+      "abv_pct": 17.2,
+      "abv_class": "слабоалкогольный",
+      "sugar_gpl": 260,
+      "volume_l": 0.7,
+      "taste": {
+        "l1": "Эмульсивные",
+        "l2": "Яичные",
+        "l3": "Классический адвокат",
+        "id_path": "E-E-C"
+      },
+      "source_quality": "literature",
+      "notes": "Желток + бренди + сахар + ваниль. Без праздничных специй — классический адвокат."
+    }
+  ]
+}
