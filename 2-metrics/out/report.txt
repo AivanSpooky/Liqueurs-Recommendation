@@ -1,0 +1,113 @@
+==============================================================================
+ЛР 2.1a. СРАВНЕНИЕ ЧИСЛОВЫХ МЕР НА ЭТАЛОННЫХ ПАРАХ
+==============================================================================
+пара           евклид  манхэтт    минк3  чебышёв  косинус   комментарий
+L26-L27      0.0000   0.0000   0.0000   0.0000   0.0000   Crème de Cacao Brown/White: числовые признаки идентичны
+L08-L10      0.0253   0.0146   0.0303   0.0438   0.0011   Cointreau/Grand Marnier: 40%, сахар 200 vs 214
+L20-L21      0.0361   0.0208   0.0433   0.0625   0.0011   Disaronno/Luxardo: 28%, сахар 300 vs 280
+L15-L16      0.1010   0.0583   0.1213   0.1750   0.0250   Абрикос/персик Giffard/Archers: сахар 280, abv 25 vs 18
+L04-L13      0.5805   0.3771   0.6936   1.0000   0.4517   Chartreuse 55% vs Ponche 15%: крайние по крепости
+L06-L30      0.4522   0.3692   0.4839   0.5625   0.6135   Fernet 39%/80 сахар vs Advocaat 17.2%/260
+L01-L19      0.1010   0.0583   0.1213   0.1750   0.0127   Мята/банан: сахар оба 400, abv 24 vs 17
+
+Спирменовы корреляции ранжирований пар между мерами:
+   euclidean vs manhattan  rho = 0.9737
+   euclidean vs minkowski_p3 rho = 0.9951
+   euclidean vs chebyshev  rho = 0.9700
+   euclidean vs cosine     rho = 0.8813
+   manhattan vs minkowski_p3 rho = 0.9496
+   manhattan vs chebyshev  rho = 0.9027
+   manhattan vs cosine     rho = 0.9063
+  minkowski_p3 vs chebyshev  rho = 0.9868
+  minkowski_p3 vs cosine     rho = 0.8570
+   chebyshev vs cosine     rho = 0.8087
+
+Доля пар с одинаковым расстоянием (связки, грубость шкалы):
+   euclidean: уникальных значений 354 из 435, значений со связями 148
+   manhattan: уникальных значений 227 из 435, значений со связями 310
+  minkowski_p3: уникальных значений 359 из 435, значений со связями 141
+   chebyshev: уникальных значений  92 из 435, значений со связями 406
+      cosine: уникальных значений 406 из 435, значений со связями 57
+
+Ближайшие соседи (top-3) по каждой числовой мере для ключевых ликёров:
+  L26 Bols Crème de Cacao Brown
+     euclidean: L27(0.000), L01(0.009), L12(0.058)
+     manhattan: L27(0.000), L01(0.005), L12(0.039)
+    minkowski_p3: L27(0.000), L01(0.011), L12(0.069)
+     chebyshev: L27(0.000), L01(0.016), L12(0.100)
+        cosine: L27(0.000), L01(0.000), L12(0.004)
+  L05 Amaro Averna
+     euclidean: L07(0.088), L21(0.091), L15(0.107)
+     manhattan: L07(0.060), L21(0.060), L20(0.081)
+    minkowski_p3: L07(0.104), L21(0.108), L15(0.117)
+     chebyshev: L07(0.150), L15(0.156), L21(0.156)
+        cosine: L21(0.013), L07(0.019), L20(0.021)
+  L28 Baileys Original Irish Cream
+     euclidean: L13(0.292), L29(0.292), L22(0.350)
+     manhattan: L29(0.192), L13(0.200), L30(0.239)
+    minkowski_p3: L13(0.347), L29(0.347), L22(0.416)
+     chebyshev: L13(0.500), L29(0.500), L06(0.600)
+        cosine: L29(0.025), L17(0.057), L13(0.066)
+  L24 Mr Black Cold Brew
+     euclidean: L17(0.068), L07(0.112), L05(0.139)
+     manhattan: L17(0.054), L07(0.079), L05(0.106)
+    minkowski_p3: L17(0.075), L07(0.131), L29(0.154)
+     chebyshev: L17(0.100), L07(0.188), L29(0.200)
+        cosine: L17(0.025), L05(0.036), L07(0.044)
+  L08 Cointreau
+     euclidean: L10(0.025), L03(0.136), L05(0.168)
+     manhattan: L10(0.015), L03(0.108), L05(0.123)
+    minkowski_p3: L10(0.030), L03(0.149), L05(0.193)
+     chebyshev: L10(0.044), L03(0.200), L05(0.275)
+        cosine: L10(0.001), L04(0.014), L03(0.025)
+
+==============================================================================
+ЛР 2.1b. АССОЦИАТИВНЫЕ БИНАРНЫЕ МЕРЫ — сравнение
+==============================================================================
+Пары, где оба объекта (0,0) по bitter/wood — тест на полноту учёта:
+  объектов с (0,0): 19
+  L26-L27         jaccard: 1.000
+  L26-L27            dice: 1.000
+  L26-L27  sokal_michener: 1.000
+  L26-L27 rogers_tanimoto: 1.000
+Пара с одним рассогласованием (L28(0,1) vs L30(0,0)):
+  L28-L30         jaccard: 0.000
+  L28-L30            dice: 0.000
+  L28-L30  sokal_michener: 0.500
+  L28-L30 rogers_tanimoto: 0.333
+Пара с полным рассогласованием (L05(1,1) vs L01(0,0)):
+  L05-L01         jaccard: 0.000
+  L05-L01            dice: 0.000
+  L05-L01  sokal_michener: 0.000
+  L05-L01 rogers_tanimoto: 0.000
+
+==============================================================================
+ЛР 2.2. ТАКСОНОМИЯ — примеры значений
+==============================================================================
+  L26-L27: sim=0.667   общий лист (R-C-*)
+  L20-L21: sim=0.667   общий L2 'Ядра косточковых', разный L3
+  L05-L07: sim=1.000   общий лист 'Амаро'
+  L01-L03: sim=0.333   общий L1 'Травяные', разный L2
+  L08-L26: sim=0.000   разный L1 (Фруктовые vs Обжаренные)
+
+==============================================================================
+ЛР 2.3. АГРЕГИРОВАННАЯ МЕРА — top-5 соседей
+==============================================================================
+  L26 Bols Crème de Cacao Brown:
+      L27 Bols Crème de Cacao  (0.883), L01 Bols Crème de Menthe (0.647), L25 Kahlúa (0.632), L19 Bols Crème de Banane (0.620), L12 Lejay Crème de Cassi (0.532)
+  L05 Amaro Averna:
+      L07 Amaro Montenegro (0.848), L06 Fernet-Branca (0.750), L03 Jägermeister (0.618), L04 Chartreuse Verte (0.562), L23 Nocino Riserva (0.530)
+  L28 Baileys Original Irish Cream:
+      L29 Amarula (0.696), L13 Ponche Crema (0.504), L30 Warninks Advocaat (0.453), L10 Grand Marnier Cordon (0.406), L22 Frangelico (0.370)
+  L03 Jägermeister:
+      L06 Fernet-Branca (0.748), L04 Chartreuse Verte (0.727), L07 Amaro Montenegro (0.681), L05 Amaro Averna (0.618), L02 Génépi des Pères Cha (0.553)
+  L08 Cointreau:
+      L10 Grand Marnier Cordon (0.867), L09 Villa Massa Limoncel (0.789), L11 Giffard Pamplemousse (0.691), L15 Giffard Abricot du R (0.605), L17 Malibu Original (0.550)
+  L24 Mr Black Cold Brew:
+      L03 Jägermeister (0.505), L07 Amaro Montenegro (0.483), L25 Kahlúa (0.476), L06 Fernet-Branca (0.476), L17 Malibu Original (0.455)
+
+Проверки: diag(sim)=1, симметрия, диапазоны
+  sim_num: diag=[1.000,1.000] sym=True range=[0.333,1.000]
+  sim_bin: diag=[1.000,1.000] sym=True range=[0.000,1.000]
+  sim_taste: diag=[1.000,1.000] sym=True range=[0.000,1.000]
+  sim_total: diag=[1.000,1.000] sym=True range=[0.172,1.000]
