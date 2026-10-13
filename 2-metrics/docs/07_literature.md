@@ -74,6 +74,19 @@
 **Обзор:** Semantic similarity (WordNet, все меры с формулами):
 <https://en.wikipedia.org/wiki/Semantic_similarity>
 
+## Веса при агрегации мер (ЛР 2.3)
+
+- **Shannon C.E.** A Mathematical Theory of Communication // Bell
+  System Technical Journal, 1948, 27, с. 379–423 — энтропия
+  распределения как мера информативности.
+- **Diakoulaki D., Mavrotas G., Papayannakis L.** Determining
+  objective weights in multiple criteria problems: The CRITIC method
+  // Computers & Operations Research, 1995, 22(7), с. 763–770 —
+  вес = контрастность (σ) × конфликт (1 − корреляция).
+  <https://doi.org/10.1016/0305-0548(94)00059-H>
+- Обзор объективных методов взвешивания (энтропия, СКО, CRITIC):
+  <https://en.wikipedia.org/wiki/Weighting>
+
 ## Общее
 
 - Distance / Similarity measures overview:
