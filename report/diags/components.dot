@@ -1,0 +1,17 @@
+digraph C {
+rankdir=LR; compound=true; nodesep=0.3; ranksep=0.45; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=10, shape=box, style="rounded,filled", fillcolor="#ffffff", color="#7a1f3d"];
+edge [color="#5b4f47", arrowhead=vee, fontname="DejaVu Sans", fontsize=9];
+data [label="1-dataset/\ndataset.json", shape=cylinder, fillcolor="#f0e9de"];
+subgraph cluster_lr3 { label="3-likesdislikes (ЛР3) — пакет recsys"; style="rounded"; color="#7a1f3d"; fontsize=11;
+  domain [label="domain\nмодель, каталог,\nтаксономия"]; similarity [label="similarity\nмеры ЛР2,\nматрица"];
+  recommend [label="recommend\nстратегии v1–v3,\nвалидация"]; service [label="service\nфасад"];
+  web [label="web\nHTTP-каркас, API,\nHTML5/JS"]; }
+subgraph cluster_lr4 { label="4-search (ЛР4 + РК1)"; style="rounded"; color="#b86e1c"; fontsize=11;
+  boot [label="bootstrap\nподключение ЛР3"]; search [label="search\nфильтры, полезность,\nослабление"];
+  unified [label="unified\nсессии, история,\nкоманды, API, UI"]; }
+browser [label="Браузер\n(пользователь)", shape=component, fillcolor="#e9f0fa"];
+data -> domain; domain -> similarity -> recommend -> service -> web;
+boot -> service [style=dashed, label="sys.path"]; search -> domain; unified -> search; unified -> service; unified -> web [label="http, static"];
+web -> browser [dir=both, label=":8003"]; unified -> browser [dir=both, label=":8004"];
+}

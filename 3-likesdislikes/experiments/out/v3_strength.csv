@@ -1,0 +1,10 @@
+policy,strength,recall_inner,recall_outer,leakage_outer
+threshold,0.6,0.1053,0.8712,0.0091
+threshold,0.7,0.4474,0.9242,0.0288
+threshold,0.8,0.7632,0.9318,0.0394
+subtract,0.25,0.9211,0.9394,0.0227
+subtract,0.5,0.8684,0.947,0.0091
+subtract,1.0,0.3684,0.9015,0.0015
+contrastive,0.5,0.9474,0.9318,0.0258
+contrastive,1.0,0.9211,0.9318,0.0167
+contrastive,2.0,0.8421,0.9167,0.0121

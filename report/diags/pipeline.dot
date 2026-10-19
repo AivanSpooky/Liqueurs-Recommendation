@@ -1,0 +1,14 @@
+digraph P {
+rankdir=LR; nodesep=0.25; ranksep=0.35; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=10, shape=box, style="rounded,filled", fillcolor="#ffffff", color="#7a1f3d"];
+edge [color="#5b4f47", arrowhead=vee, fontname="DejaVu Sans", fontsize=9];
+in [label="JSON-запрос\nmode, likes, dislikes,\nN, стратегии", shape=note, fillcolor="#f0e9de"];
+parse [label="RequestParser\nтипы полей"]; val [label="RequestValidator\n7 правил"];
+cand [label="Кандидаты\nкаталог (или пул)\n− оценённые"];
+rank [label="LikesRanker\nоценка релевантности\n(v1, v2)"]; adj [label="DislikePolicy\nкорректировка\n(v3)"];
+cut [label="top-N"]; expl [label="Объяснение\nближайший лайк,\nвклады мер"];
+out [label="Ранжированный\nсписок", shape=note, fillcolor="#f0e9de"];
+err [label="400: список\nошибок", shape=note, fillcolor="#f8e3e0"];
+in -> parse -> val -> cand -> rank -> cut -> expl -> out; adj -> rank [style=dashed, label="adjust"];
+parse -> err [style=dotted]; val -> err [style=dotted];
+}

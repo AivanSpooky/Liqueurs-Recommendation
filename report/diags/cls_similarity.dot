@@ -1,0 +1,28 @@
+digraph G {
+rankdir=BT; nodesep=0.35; ranksep=0.55; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=10, shape=plain];
+edge [fontname="DejaVu Sans", fontsize=9, color="#5b4f47"];
+"SimilarityMeasure" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#f7ead9"><tr><td><font point-size="8">«interface»</font></td></tr><tr><td><b>SimilarityMeasure</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">similarity(a, b): float</td></tr></table></td></tr></table>>];
+"NormalizedEuclidean" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>NormalizedEuclidean</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">axes: NumericAxis[3]</td></tr></table></td></tr></table>>];
+"SimpleMatching" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>SimpleMatching</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">getters</td></tr></table></td></tr></table>>];
+"WuPalmer" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>WuPalmer</b></td></tr></table>>];
+"OrdinalSimilarity" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>OrdinalSimilarity</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">getter, levels</td></tr></table></td></tr></table>>];
+"ExactMatch" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>ExactMatch</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">name, getter</td></tr></table></td></tr></table>>];
+"WeightedSum" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><font point-size="8">«composite»</font></td></tr><tr><td><b>WeightedSum</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">weights</td></tr><tr><td align="left" balign="left">contributions(a, b)</td></tr></table></td></tr></table>>];
+"MeasureFactory" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><font point-size="8">«factory»</font></td></tr><tr><td><b>MeasureFactory</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">expert(): WeightedSum</td></tr><tr><td align="left" balign="left">partial_measures()</td></tr></table></td></tr></table>>];
+"SimilarityMatrix" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><font point-size="8">«proxy / cache»</font></td></tr><tr><td><b>SimilarityMatrix</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">get(a, b)</td></tr><tr><td align="left" balign="left">best(x, anchors)</td></tr></table></td></tr></table>>];
+"Catalog" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><font point-size="8">«repository»</font></td></tr><tr><td><b>Catalog</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">get(id)</td></tr><tr><td align="left" balign="left">ids()</td></tr><tr><td align="left" balign="left">distinct(getter)</td></tr></table></td></tr></table>>];
+"JsonCatalogLoader" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>JsonCatalogLoader</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">load(): Catalog</td></tr></table></td></tr></table>>];
+"NormalizedEuclidean" -> "SimilarityMeasure" [arrowhead=onormal];
+"SimpleMatching" -> "SimilarityMeasure" [arrowhead=onormal];
+"WuPalmer" -> "SimilarityMeasure" [arrowhead=onormal];
+"OrdinalSimilarity" -> "SimilarityMeasure" [arrowhead=onormal];
+"ExactMatch" -> "SimilarityMeasure" [arrowhead=onormal];
+"WeightedSum" -> "SimilarityMeasure" [arrowhead=onormal];
+"WeightedSum" -> "SimilarityMeasure" [arrowhead=vee, arrowtail=odiamond, dir=both, label="Component (ω_k) ×6"];
+"MeasureFactory" -> "WeightedSum" [arrowhead=vee, style=dashed, label="создаёт"];
+"SimilarityMatrix" -> "SimilarityMeasure" [arrowhead=vee, style=dashed, label="кэширует"];
+"SimilarityMatrix" -> "Catalog" [arrowhead=vee, style=dashed, label=""];
+"JsonCatalogLoader" -> "Catalog" [arrowhead=vee, style=dashed, label="создаёт"];
+"MeasureFactory" -> "Catalog" [arrowhead=vee, style=dashed, label="min-max"];
+}

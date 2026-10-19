@@ -1,0 +1,32 @@
+\documentclass[a4paper,14pt, unknownkeysallowed]{extreport}
+
+\input{1-nissettings}
+
+% Колонки таблиц: выравнивание по левому краю (L) и мелкий шрифт для длинной таблицы (S)
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{S}[1]{>{\scriptsize\raggedright\arraybackslash}p{#1}}
+
+\begin{document}
+
+\include{title}
+\enablegostpagenumber
+\setcounter{page}{2}
+\makeatletter
+\renewcommand{\@makeschapterhead}[1]{%
+  {\parindent \z@ \centering \normalfont
+    \interlinepenalty\@M
+    \large \bfseries #1\par\nobreak
+    \vskip 20\p@
+  }}
+\makeatother
+
+\include{3-content}
+\include{4.5-terms}
+\include{4-introduction}
+\include{5-lr1}
+\include{6-lr2}
+\include{7-lr3}
+\include{8-lr4}
+\include{9-conclusion}
+\include{10-sources}
+\end{document}

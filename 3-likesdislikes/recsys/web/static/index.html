@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ликёры — рекомендации</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Ликёрная карта</h1>
+  </header>
+
+  <main class="layout">
+    <section class="panel">
+      <header>
+        <h2>Каталог</h2>
+        <div class="segmented" id="modes" role="group" aria-label="Режим"></div>
+      </header>
+      <div class="body">
+        <p class="mode-hint" id="mode-hint"></p>
+        <div class="toolbar">
+          <input class="input" id="query" type="search" placeholder="Название, производитель, страна…" aria-label="Быстрый поиск по каталогу">
+          <div id="branches" class="row"></div>
+        </div>
+        <div class="grid" id="catalog"></div>
+      </div>
+    </section>
+
+    <aside class="panel sticky">
+      <header><h2>Профиль и рекомендации</h2></header>
+      <div class="body">
+        <div class="label" id="likes-label">Лайки</div>
+        <div class="profile-row" id="likes"></div>
+        <div id="dislikes-block">
+          <div class="label">Дизлайки</div>
+          <div class="profile-row" id="dislikes"></div>
+        </div>
+
+        <div class="field">
+          <label for="top-n">Сколько рекомендаций показать (N)</label>
+          <input class="input" id="top-n" type="number" min="1" max="30" value="5">
+        </div>
+        <div class="field" id="ranker-field">
+          <label for="ranker">Как учитывать несколько лайков (PCv2)</label>
+          <select class="input" id="ranker"></select>
+          <p class="hint" id="ranker-hint"></p>
+        </div>
+        <div class="field" id="policy-field">
+          <label for="policy">Как учитывать дизлайки (PCv3)</label>
+          <select class="input" id="policy"></select>
+          <p class="hint" id="policy-hint"></p>
+        </div>
+
+        <div class="row" style="margin-top:14px">
+          <button class="btn primary" id="run">Подобрать</button>
+          <button class="btn ghost" id="clear">Очистить профиль</button>
+        </div>
+        <div id="messages"></div>
+        <div class="results" id="results"></div>
+      </div>
+    </aside>
+  </main>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

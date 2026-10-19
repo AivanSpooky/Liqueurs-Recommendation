@@ -1,0 +1,25 @@
+digraph G {
+rankdir=BT; nodesep=0.35; ranksep=0.55; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=10, shape=plain];
+edge [fontname="DejaVu Sans", fontsize=9, color="#5b4f47"];
+"LikesRanker" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#f7ead9"><tr><td><font point-size="8">«strategy»</font></td></tr><tr><td><b>LikesRanker</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">rank(likes, candidates, adjust)</td></tr></table></td></tr></table>>];
+"WeightedMeanRanker" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><font point-size="8">«template method»</font></td></tr><tr><td><b>WeightedMeanRanker</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">weights(likes)</td></tr></table></td></tr></table>>];
+"MeanRanker" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>MeanRanker</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">А</td></tr></table></td></tr></table>>];
+"RecencyRanker" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>RecencyRanker</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">Б: γ = 0,7</td></tr></table></td></tr></table>>];
+"BalancedRanker" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>BalancedRanker</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">В: 1/|группа|</td></tr></table></td></tr></table>>];
+"MaxRanker" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>MaxRanker</b></td></tr></table>>];
+"RoundRobinRanker" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>RoundRobinRanker</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">Г′</td></tr></table></td></tr></table>>];
+"GroupRanker" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>GroupRanker</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">Г: θ = 0,65</td></tr></table></td></tr></table>>];
+"AvoidRanker" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>AvoidRanker</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">только дизлайки</td></tr></table></td></tr></table>>];
+"LikeGrouper" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>LikeGrouper</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">groups(likes)</td></tr></table></td></tr></table>>];
+"WeightedMeanRanker" -> "LikesRanker" [arrowhead=onormal];
+"MaxRanker" -> "LikesRanker" [arrowhead=onormal];
+"RoundRobinRanker" -> "LikesRanker" [arrowhead=onormal];
+"GroupRanker" -> "LikesRanker" [arrowhead=onormal];
+"AvoidRanker" -> "LikesRanker" [arrowhead=onormal];
+"MeanRanker" -> "WeightedMeanRanker" [arrowhead=onormal];
+"RecencyRanker" -> "WeightedMeanRanker" [arrowhead=onormal];
+"BalancedRanker" -> "WeightedMeanRanker" [arrowhead=onormal];
+"GroupRanker" -> "LikeGrouper" [arrowhead=vee, style=dashed, label=""];
+"BalancedRanker" -> "LikeGrouper" [arrowhead=vee, style=dashed, label=""];
+}

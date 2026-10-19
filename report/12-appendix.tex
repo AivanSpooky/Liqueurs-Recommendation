@@ -1,0 +1,35 @@
+\chapter*{ПРИЛОЖЕНИЕ А}
+\addcontentsline{toc}{chapter}{ПРИЛОЖЕНИЕ А}
+
+\noindent\textbf{Структура репозитория и запуск}
+
+{\footnotesize\begin{verbatim}
+1-dataset/          датасет (ЛР1): dataset.json, xlsx-копия
+2-metrics/          меры близости (ЛР2): metrics.py, out/ (матрицы,
+                    тепловые карты, matrices.html), docs/
+3-likesdislikes/    рекомендательная система (ЛР3)
+  run.py            запуск интерфейса, http://127.0.0.1:8003/
+  recsys/           domain, similarity, recommend, service, web
+  experiments/      evaluate.py, plots.py -> out/
+  tests/            unittest (25 тестов)
+  tools/            method_length.py - правило "<= 5 строк"
+4-search/           поиск и объединённая система (ЛР4, РК1)
+  run.py            запуск интерфейса, http://127.0.0.1:8004/
+  bootstrap.py      подключение пакета recsys из ЛР3
+  search/           фильтры, запрос, полезность, ослабление
+  unified/          сессии, история, команды, API, интерфейс
+  experiments/      compare_fallback.py -> out/
+  tests/            unittest (13 тестов)
+report/             этот отчёт (LaTeX)
+\end{verbatim}}
+
+\noindent Требования: Python 3.10 и выше; сторонние пакеты для работы систем не нужны. Для проверочных расчётов и ЛР2 нужны \code{numpy}, \code{matplotlib}, \code{openpyxl}.
+
+{\footnotesize\begin{verbatim}
+cd 3-likesdislikes && python run.py
+cd 4-search && python run.py
+python -m unittest discover -s tests -t .
+python experiments/evaluate.py && python experiments/plots.py
+\end{verbatim}}
+
+\noindent Рисунки отчёта собираются скриптом \code{report/tools/build\_figures.py}: диаграммы из \code{report/diags/*.dot} (Graphviz), графики сравнений подходов и тепловые карты ЛР2 копируются в \code{report/img/}.

@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+
+# LaTeX: промежуточные файлы сборки отчёта
+report/*.aux
+report/*.log
+report/*.toc
+report/*.out
+report/*.bbl
+report/*.bcf
+report/*.blg
+report/*.run.xml
+report/*.synctex.gz
+report/*.listing
+report/*.fls
+report/*.fdb_latexmk
+
+# Windows: в PowerShell `> nul` создаёт файл с именем nul, Git его не открывает
+nul

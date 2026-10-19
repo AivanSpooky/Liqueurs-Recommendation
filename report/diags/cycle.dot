@@ -1,0 +1,12 @@
+digraph Y {
+rankdir=LR; nodesep=0.4; ranksep=0.6; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=10, shape=box, style="rounded,filled", fillcolor="#ffffff", color="#7a1f3d"];
+edge [color="#5b4f47", arrowhead=vee, fontname="DejaVu Sans", fontsize=9];
+search [label="Поиск (ЛР4)\nфильтры по каталогу"]; rate [label="Лайки / дизлайки\nв любой выдаче"];
+rec [label="Рекомендации (ЛР3)\nпо каталогу или\nсреди текущей выдачи"]; refine [label="Уточнение\nфильтры по\nтекущей выдаче"];
+fb [label="«Не найдено точного\nсоответствия, однако,\nвозможно, Вам понравится»", fillcolor="#f7ead9"];
+hist [label="История шагов\n(Memento): вернуться\nк любому шагу", shape=folder, fillcolor="#f0e9de"];
+search -> rate -> rec -> refine -> rate; refine -> search [label="начать заново"];
+search -> fb [style=dashed, label="пусто"]; refine -> fb [style=dashed]; rec -> fb [style=dashed, label="с фильтрами"];
+{search rec refine} -> hist [style=dotted, arrowhead=none];
+}

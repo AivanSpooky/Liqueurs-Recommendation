@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ликёры — поиск и рекомендации</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/unified.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>Ликёрная карта</h1>
+  </header>
+
+  <main class="layout-3">
+    <!-- Фильтры (ЛР4) -->
+    <aside class="panel sticky">
+      <header><h2>Фильтры</h2></header>
+      <form class="body" id="filters" autocomplete="off">
+        <div class="field"><label for="f-name">Название или производитель</label>
+          <input class="input" id="f-name" name="name" placeholder="например, amaro или kahlua"></div>
+
+        <div class="label">Вкус</div>
+        <div id="f-taste" class="tree"></div>
+
+        <div class="label">Крепость, %</div>
+        <div class="range" data-range="abv"></div>
+        <div class="label">Сахар, г/л</div>
+        <div class="range" data-range="sugar"></div>
+        <div class="label">Объём, л</div>
+        <div class="range" data-range="volume"></div>
+
+        <div class="label">Класс сладости</div>
+        <div id="f-sugar-classes" class="checks"></div>
+
+        <div class="label">Горечь</div>
+        <div class="segmented small" data-flag="bitter"></div>
+        <div class="label">Выдержка в дереве</div>
+        <div class="segmented small" data-flag="wood"></div>
+
+        <details class="more"><summary>Страна</summary><div id="f-countries" class="checks"></div></details>
+        <details class="more"><summary>Производитель</summary><div id="f-producers" class="checks"></div></details>
+
+        <div class="row buttons">
+          <button class="btn primary" type="submit" id="do-search" title="Новый поиск по всему каталогу">Найти</button>
+          <button class="btn" type="button" id="do-refine" title="Отфильтровать текущую выдачу">Уточнить выдачу</button>
+          <button class="btn ghost" type="reset" id="do-clear">Сбросить</button>
+        </div>
+      </form>
+    </aside>
+
+    <!-- Выдача -->
+    <section class="panel">
+      <header>
+        <h2 id="step-title">Начните с поиска или отметьте понравившиеся ликёры</h2>
+      </header>
+      <div class="body">
+        <div id="messages"></div>
+        <div id="notice"></div>
+        <div class="grid" id="rows"></div>
+      </div>
+    </section>
+
+    <!-- Профиль, рекомендации (ЛР3), история (РК1) -->
+    <aside class="panel sticky">
+      <header><h2>Профиль</h2></header>
+      <div class="body">
+        <div class="label">Лайки (в порядке установки)</div>
+        <div class="profile-row" id="likes"></div>
+        <div class="label">Дизлайки</div>
+        <div class="profile-row" id="dislikes"></div>
+
+        <div class="label">Рекомендации</div>
+        <div class="row">
+          <label for="top-n">N</label><input class="input narrow" id="top-n" type="number" min="1" max="30" value="5">
+          <select class="input grow" id="ranker" aria-label="Стратегия по лайкам"></select>
+        </div>
+        <select class="input wide" id="policy" aria-label="Учёт дизлайков"></select>
+        <div class="checks" style="margin-top:8px">
+          <label><input type="radio" name="scope" value="catalog" checked> по всему каталогу</label>
+          <label><input type="radio" name="scope" value="current"> среди текущей выдачи</label>
+          <label><input type="checkbox" id="use-filters"> отфильтровать рекомендации фильтрами слева</label>
+        </div>
+        <button class="btn primary wide" id="do-recommend" style="margin-top:10px">Рекомендовать</button>
+
+        <div class="label">История запросов</div>
+        <ol class="history" id="history"></ol>
+        <div class="row">
+          <button class="btn" id="do-restart" title="Очистить историю, оставить лайки">Начать заново</button>
+          <button class="btn ghost" id="do-reset" title="Очистить историю и профиль">Сбросить всё</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script type="module" src="/js/unified.js"></script>
+</body>
+</html>

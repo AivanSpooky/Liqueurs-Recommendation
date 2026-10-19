@@ -1,0 +1,26 @@
+digraph G {
+rankdir=BT; nodesep=0.35; ranksep=0.55; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=10, shape=plain];
+edge [fontname="DejaVu Sans", fontsize=9, color="#5b4f47"];
+"DislikePolicy" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#f7ead9"><tr><td><font point-size="8">«strategy»</font></td></tr><tr><td><b>DislikePolicy</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">adjuster(profile)</td></tr><tr><td align="left" balign="left">adjust(scored, profile)</td></tr></table></td></tr></table>>];
+"ExcludeOnly" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>ExcludeOnly</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">1</td></tr></table></td></tr></table>>];
+"ThresholdExclusion" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>ThresholdExclusion</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">2: τ = 0,7</td></tr></table></td></tr></table>>];
+"SubtractivePenalty" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>SubtractivePenalty</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">3: β</td></tr></table></td></tr></table>>];
+"ContrastivePenalty" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>ContrastivePenalty</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">4: β = 1</td></tr></table></td></tr></table>>];
+"LikesRanker" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#f7ead9"><tr><td><font point-size="8">«strategy»</font></td></tr><tr><td><b>LikesRanker</b></td></tr></table>>];
+"SimilarityMatrix" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>SimilarityMatrix</b></td></tr></table>>];
+"ContentRecommender" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><font point-size="8">«facade»</font></td></tr><tr><td><b>ContentRecommender</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">recommend(request)</td></tr><tr><td align="left" balign="left">rank(request)</td></tr><tr><td align="left" balign="left">candidates(request)</td></tr></table></td></tr></table>>];
+"RequestParser" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>RequestParser</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">parse(json)</td></tr></table></td></tr></table>>];
+"RequestValidator" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><b>RequestValidator</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">validate(request)</td></tr><tr><td align="left" balign="left">правил: 7</td></tr></table></td></tr></table>>];
+"RecommendationService" [label=<<table border="1" cellborder="0" cellspacing="0" cellpadding="4" color="#7a1f3d" bgcolor="#ffffff"><tr><td><font point-size="8">«facade»</font></td></tr><tr><td><b>RecommendationService</b></td></tr><tr><td><table border="0" cellspacing="0" cellpadding="1"><tr><td align="left" balign="left">parse(json)</td></tr><tr><td align="left" balign="left">recommend(request)</td></tr><tr><td align="left" balign="left">catalog, taxonomy</td></tr></table></td></tr></table>>];
+"ExcludeOnly" -> "DislikePolicy" [arrowhead=onormal];
+"ThresholdExclusion" -> "DislikePolicy" [arrowhead=onormal];
+"SubtractivePenalty" -> "DislikePolicy" [arrowhead=onormal];
+"ContrastivePenalty" -> "DislikePolicy" [arrowhead=onormal];
+"ContentRecommender" -> "LikesRanker" [arrowhead=vee, arrowtail=odiamond, dir=both, label="реестр"];
+"ContentRecommender" -> "DislikePolicy" [arrowhead=vee, arrowtail=odiamond, dir=both, label="реестр"];
+"ContentRecommender" -> "SimilarityMatrix" [arrowhead=vee, style=dashed, label=""];
+"RecommendationService" -> "ContentRecommender" [arrowhead=vee, arrowtail=odiamond, dir=both, label=""];
+"RecommendationService" -> "RequestParser" [arrowhead=vee, style=dashed, label=""];
+"RecommendationService" -> "RequestValidator" [arrowhead=vee, style=dashed, label=""];
+}

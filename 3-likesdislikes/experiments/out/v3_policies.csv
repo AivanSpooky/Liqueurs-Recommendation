@@ -1,0 +1,13 @@
+ranker,policy,recall_inner,recall_outer,leakage_outer
+max,exclude,0.9737,0.9167,0.0515
+max,threshold,0.4474,0.9242,0.0288
+max,subtract,0.3947,0.9242,0.0
+max,contrastive,0.9211,0.9318,0.0182
+roundrobin,exclude,0.9737,0.9167,0.0485
+roundrobin,threshold,0.4474,0.9242,0.0288
+roundrobin,subtract,0.3947,0.9091,0.0015
+roundrobin,contrastive,0.9211,0.9318,0.0182
+group,exclude,0.9737,0.9167,0.0485
+group,threshold,0.4474,0.9242,0.0288
+group,subtract,0.3684,0.9015,0.0015
+group,contrastive,0.9211,0.9318,0.0167
