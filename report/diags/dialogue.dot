@@ -1,0 +1,21 @@
+digraph D {
+rankdir=LR; nodesep=0.3; ranksep=0.45; fontname="DejaVu Sans";
+node [fontname="DejaVu Sans", fontsize=10, shape=box, style="rounded,filled", fillcolor="#ffffff", color="#7a1f3d"];
+edge [color="#5b4f47", arrowhead=vee, fontname="DejaVu Sans", fontsize=9];
+q [label="Вопрос\nпользователя", shape=note, fillcolor="#f0e9de"];
+norm [label="Нормализация\nрегистр, ё, диакритика,\nпунктуация"];
+lex [label="Местозаменители\n<ликёр> <коктейль>\n<вкус> <страна> <признак>"];
+score [label="Баллы классов\nсумма весов\nопорных слов"];
+dec [label="max балл ≥ 1,5 ?", shape=diamond, fillcolor="#f7ead9"];
+subgraph cluster_h { label="Обработчики (ЛР6 и далее)"; style="rounded,dashed"; color="#8a7d72"; fontsize=10;
+  h1 [label="1. Справка о домене\nдатасет, таксономия,\nкоктейли"];
+  h2 [label="2. Справка\nо возможностях"];
+  h3 [label="3. Рекомендатель ЛР3\nи поиск ЛР4"];
+  h4 [label="4. Сравнение\nмерой ЛР2"];
+  h5 [label="5. Правка каталога"];
+}
+r6 [label="6. Вежливый ответ\nпо шаблону", fillcolor="#f8e3e0"];
+q -> norm -> lex -> score -> dec;
+dec -> h1 [label="да"]; dec -> h2; dec -> h3; dec -> h4; dec -> h5;
+dec -> r6 [label="нет или класс 6"];
+}

@@ -1,0 +1,490 @@
+\input{imgmode}
+
+\usepackage[14pt]{extsizes}
+%\usepackage{cmap} % Улучшенный поиск русских слов в полученном pdf-файле
+\usepackage[T2A]{fontenc}
+\usepackage{cmap}
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel} % Языки: русский, английский
+\usepackage{makecell}
+\usepackage{ragged2e}
+\usepackage{pdfpages}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\renewcommand{\emph}[1]{#1}    % Делает \emph обычным текстом
+\renewcommand{\textit}[1]{#1}  % Делает \textit обычным текстом
+\usepackage[
+  backend=biber,
+  style=gost-numeric,
+  sorting=none,
+  language=auto,
+  autolang=other
+]{biblatex}
+\DeclareFieldFormat*{title}{#1\isdot}       % Для полей title
+\DeclareFieldFormat*{booktitle}{#1\isdot}   % Для полей booktitle
+\DeclareFieldFormat*{maintitle}{#1\isdot}   % Для полей maintitle
+\DeclareFieldFormat*{issuetitle}{#1\isdot}  % Для полей issuetitle
+\DeclareFieldFormat*{journaltitle}{#1}      % Для полей journaltitle
+\DeclareFieldFormat*{citetitle}{#1}         % Для ссылок в тексте, если используете \citetitle
+\DeclareFieldFormat{labelnumberwidth}{#1\adddot}
+\setlength{\biblabelsep}{0.5em}
+\addbibresource{report.bib}
+% ГОСТ: первый автор + название / все авторы (не «Иванов, Петров, …» перед названием).
+\makeatletter
+\AtBeginBibliography{%
+	\toggletrue{bbx:gostbibliography}%
+	\def\bbx@gost@respdelim{\setunit{\respdelim}}%
+}
+
+% Печатные источники: без URL; электронные: [Электронный ресурс] — Режим доступа: URL: … (дата обращения: …)
+\AtEveryBibitem{%
+	\def\bbx@gost@respdelim{\setunit{\respdelim}}%
+	\clearfield{doi}%
+	\ifboolexpr{%
+		test {\ifentrytype{online}}%
+	}{%
+	}{%
+		\clearfield{url}%
+		\clearfield{urldate}%
+	}%
+	\ifboolexpr{%
+		test {\ifentrytype{thesis}}%
+		or test {\ifentrytype{mastersthesis}}%
+		or test {\ifentrytype{phdthesis}}%
+	}{%
+		\clearfield{type}%
+	}{}%
+}
+\DefineBibliographyExtras{russian}{%
+	\protected\def\mkbibdate#1#2#3{%
+		\mkdayzeros{#1}.\mkmonthzeros{#2}.#3%
+	}%
+}
+\renewbibmacro*{url+urldate}{%
+	\iffieldundef{url}{}{%
+		\printtext{ [Электронный ресурс]}%
+		\addspace\textemdash\space
+		Режим доступа\addcolon\space
+		URL\addcolon\space
+		\url{\thefield{url}}%
+		\iffieldundef{urlyear}{}{%
+			\space(дата обращения\addcolon\space
+			\mkdayzeros{\thefield{urlday}}.\mkmonthzeros{\thefield{urlmonth}}.\thefield{urlyear})%
+		}%
+	}%
+}
+\renewbibmacro*{doi+eprint+url+note}{%
+	\ifboolexpr{test {\ifentrytype{online}}}{%
+		\usebibmacro{url+urldate+note}%
+	}{%
+		\ifcitation
+			{\iftoggle{cbx:eprint}{\usebibmacro{eprint}}{}}%
+		{\iftoggle{bbx:eprint}{\usebibmacro{eprint}}{}}%
+		\newunit\newblock
+		\usebibmacro{url+urldate+note}%
+	}%
+}
+% После года — пробел, не тире, перед [Электронный ресурс]
+\DeclareBibliographyDriver{online}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{heading}%
+  \newunit
+  \usebibmacro{author/editor}%
+  \setunit*{\labelnamepunct}%
+  \usebibmacro{title}%
+  \setunit{\addcolondelim}%
+  \usebibmacro{translation}%
+  \def\bbx@gost@respdelim{\setunit{\respdelim}}%
+  \usebibmacro{byauthor}%
+  \setunit*{\resppunct}%
+  \iflistundef{organization}
+    {}
+    {\setrespdelim%
+     \printlist{organization}%
+     \setunit*{\resppunct}}%
+  \usebibmacro{credits}%
+  \setunit*{\resppunct}%
+  \usebibmacro{byeditor}%
+  \setunit*{\resppunct}%
+  \usebibmacro{bytranslator+others}%
+  \newunit\newblock
+  \printfield{version}%
+  \newunit\newblock
+  \printlist[semicolondelim]{specdata}%
+  \iflistundef{location}{%
+  }{%
+    \newunit\newblock
+    \printlist{location}%
+    \setunit*{\addcomma\space}}%
+  \usebibmacro{date}%
+  \iffieldundef{url}{%
+    \newunit\newblock
+    \printupdate%
+    \newunit\newblock
+    \printfield{systemreq}%
+    \newunit\newblock
+    \usebibmacro{doi+eprint+url+note}%
+  }{%
+    \printupdate%
+    \printfield{systemreq}%
+    \setunit{\addspace}%
+    \usebibmacro{doi+eprint+url+note}%
+  }%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \usebibmacro{relatedblock}%
+	\usebibmacro{finentry}}
+\makeatother
+
+% Ссылки [4, 8] — целиком на одной строке (без разрыва внутри скобок)
+\DeclareDelimFormat{multicitedelim}{\addcomma\nobreakspace}
+\DeclareDelimFormat{compcitedelim}{\addcomma\nobreakspace}
+\makeatletter
+\let\mkbibbrackets@orig\mkbibbrackets
+\renewcommand*{\mkbibbrackets}[1]{\mbox{\mkbibbrackets@orig{#1}}}
+\makeatother
+
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{enumitem} % Нумерованные и Маркированные списки
+\usepackage[para,online,flushleft]{threeparttable} % Таблицы
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{etoolbox}
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{0pt}
+\makeatletter
+% Верхнее поле 20 мм на страницах продолжения longtable
+\patchcmd{\LT@output}{%
+	\global\vsize\@colroom
+	\copy\LT@head\nobreak}{%
+	\global\vsize\@colroom
+	\kern-\dimexpr 2.86mm\relax
+	\copy\LT@head\nobreak}{}{}
+\makeatother
+\usepackage[14pt]{extsizes} % Шрифт 14 по ГОСТ 7.32-2001
+\usepackage{caption} % Подписи к таблицам и рисункам
+    \captionsetup{labelsep=endash} % Разделитель между номером и текстом
+    \captionsetup[figure]{name={Рисунок}} % Подпись "Рисунок"
+%\usepackage{amsmath} % Мат. формулы
+\usepackage{amsmath}
+\RequirePackage{microtype}
+\sloppy
+
+% Работа с изображениями и таблицами; переопределение названий по ГОСТу
+\captionsetup[table]{singlelinecheck=false, labelsep=endash}
+\captionsetup[table]{justification=raggedright,singlelinecheck=off}
+\captionsetup[table]{singlelinecheck=false, labelsep=endash}
+
+% Сжатие потоков PDF (не заменяет уменьшение исходных растров)
+\pdfcompresslevel=9
+\pdfobjcompresslevel=3
+
+\usepackage{geometry} % Отступы
+    \geometry{left=30mm}
+    \geometry{right=15mm}
+    \geometry{top=20mm}
+    \geometry{bottom=20mm}
+    \geometry{headheight=14pt}
+    \geometry{headsep=10pt}
+    \geometry{footskip=10mm}
+    \setlength{\parindent}{1.25cm} % Устанавливает отступ первой строки
+\raggedbottom % не растягивать вертикальные пробелы (оглавление, переносы longtable)
+
+% Номер страницы: по центру области набора (поля 30 мм слева, 15 мм справа)
+\usepackage{eso-pic}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{%
+	\fancyhf{}%
+	\renewcommand{\headrulewidth}{0pt}%
+	\renewcommand{\footrulewidth}{0pt}%
+}
+\newif\ifgostpagenumberon
+\gostpagenumberonfalse
+\newlength{\gostpagenumx}
+\newcommand{\enablegostpagenumber}{%
+	% центр текста на листе: как у \chapter* в titleformat (не 0.5\paperwidth)
+	\setlength{\gostpagenumx}{\dimexpr 1in+\oddsidemargin+0.5\textwidth\relax}%
+	\global\gostpagenumberontrue
+}
+\AddToShipoutPictureFG{%
+	\ifgostpagenumberon
+		\AtPageLowerLeft{%
+			\put(\LenToUnit{\gostpagenumx},\LenToUnit{10mm}){%
+				\makebox(0,0)[c]{\normalfont\thepage}%
+			}%
+		}%
+	\fi
+}
+
+\usepackage{titlesec} % Используется для форматирования заголовков
+\titlespacing*{\section}{0pt}{*4}{*4}
+\titlespacing*{\subsection}{0pt}{*4}{*4}
+\titlespacing*{\subsubsection}{0pt}{*3.5}{*2}
+
+\usepackage{setspace} % Интервал
+\onehalfspacing % Полуторный интервал
+
+\frenchspacing % Промежутки между словами и предложениями отличаться не должны
+\usepackage{indentfirst} % Красная строка
+
+\usepackage{multirow} % Объединение строк в таблице
+\usepackage{listings} % Листинги
+\usepackage{xcolor} % Цвета
+
+% \usepackage{listingsutf8}
+% Для листинга кода:
+\lstset{%
+	language=c++,   					% выбор языка для подсветки	
+	basicstyle=\small\ttfamily,			% размер и начертание шрифта для подсветки кода
+	numbersep=5pt,
+	numbers=left,						% где поставить нумерацию строк (слева\справа)
+	%numberstyle=,					    % размер шрифта для номеров строк
+	stepnumber=1,						% размер шага между двумя номерами строк
+	xleftmargin=17pt,
+	showstringspaces=false,
+	numbersep=5pt,						% как далеко отстоят номера строк от подсвечиваемого кода
+	frame=none,							% рамка через mdframed (см. ниже)
+	tabsize=4,							% размер табуляции по умолчанию равен 4 пробелам
+	captionpos=t,						% позиция заголовка вверху [t] или внизу [b]
+	breaklines=true,					
+	breakatwhitespace=true,				% переносить строки только если есть пробел
+	escapeinside={\#*}{*)},				% если нужно добавить комментарии в коде
+	backgroundcolor=\color{white}
+}
+
+% Листинги: подпись вне рамки (до PreInit); рамка mdframed; при переносе — сомкнутые части + «Продолжение».
+\usepackage[framemethod=tikz]{mdframed}
+\renewcommand{\lstlistingname}{Листинг}
+\newcommand{\lstsplitcontinuation}{%
+	\par\vspace{4pt}%
+	\noindent{\normalfont Продолжение \lstlistingname~\thelstlisting.}%
+	\par\vspace{6pt}%
+}
+\mdfdefinestyle{lstsplitframe}{%
+	linewidth=0.8pt,
+	linecolor=black,
+	backgroundcolor=white,
+	innertopmargin=4pt,
+	innerbottommargin=4pt,
+	innerleftmargin=0pt,
+	innerrightmargin=0pt,
+	splittopskip=18pt,
+	splitbottomskip=6pt,
+	middlelinecolor=black,
+	middlelinewidth=0.8pt,
+	nobreak=false,
+	secondextra=\lstsplitcontinuation,
+	middleextra=\lstsplitcontinuation,
+}
+% Подпись листинга вне рамки, слева (в .tex перед \begin{lstlisting}, без caption=).
+\newcommand{\listingcaption}[1]{%
+	\refstepcounter{lstlisting}%
+	\par\vspace{6pt}%
+	\noindent{\lstlistingname~\thelstlisting~--~#1}%
+	\par\vspace{4pt}%
+}
+\surroundwithmdframed[style=lstsplitframe]{lstlisting}
+\makeatletter
+\lst@AddToHook{PreInit}{%
+	\interlinepenalty=10000\clubpenalty=10000\widowpenalty=10000\displaywidowpenalty=10000%
+}
+\makeatother
+
+\lstset{
+	literate=
+	{а}{{\selectfont\char224}}1
+	{б}{{\selectfont\char225}}1
+	{в}{{\selectfont\char226}}1
+	{г}{{\selectfont\char227}}1
+	{д}{{\selectfont\char228}}1
+	{е}{{\selectfont\char229}}1
+	{ё}{{\"e}}1
+	{ж}{{\selectfont\char230}}1
+	{з}{{\selectfont\char231}}1
+	{и}{{\selectfont\char232}}1
+	{й}{{\selectfont\char233}}1
+	{к}{{\selectfont\char234}}1
+	{л}{{\selectfont\char235}}1
+	{м}{{\selectfont\char236}}1
+	{н}{{\selectfont\char237}}1
+	{о}{{\selectfont\char238}}1
+	{п}{{\selectfont\char239}}1
+	{р}{{\selectfont\char240}}1
+	{с}{{\selectfont\char241}}1
+	{т}{{\selectfont\char242}}1
+	{у}{{\selectfont\char243}}1
+	{ф}{{\selectfont\char244}}1
+	{х}{{\selectfont\char245}}1
+	{ц}{{\selectfont\char246}}1
+	{ч}{{\selectfont\char247}}1
+	{ш}{{\selectfont\char248}}1
+	{щ}{{\selectfont\char249}}1
+	{ъ}{{\selectfont\char250}}1
+	{ы}{{\selectfont\char251}}1
+	{ь}{{\selectfont\char252}}1
+	{э}{{\selectfont\char253}}1
+	{ю}{{\selectfont\char254}}1
+	{я}{{\selectfont\char255}}1
+	{А}{{\selectfont\char192}}1
+	{Б}{{\selectfont\char193}}1
+	{В}{{\selectfont\char194}}1
+	{Г}{{\selectfont\char195}}1
+	{Д}{{\selectfont\char196}}1
+	{Е}{{\selectfont\char197}}1
+	{Ё}{{\"E}}1
+	{Ж}{{\selectfont\char198}}1
+	{З}{{\selectfont\char199}}1
+	{И}{{\selectfont\char200}}1
+	{Й}{{\selectfont\char201}}1
+	{К}{{\selectfont\char202}}1
+	{Л}{{\selectfont\char203}}1
+	{М}{{\selectfont\char204}}1
+	{Н}{{\selectfont\char205}}1
+	{О}{{\selectfont\char206}}1
+	{П}{{\selectfont\char207}}1
+	{Р}{{\selectfont\char208}}1
+	{С}{{\selectfont\char209}}1
+	{Т}{{\selectfont\char210}}1
+	{У}{{\selectfont\char211}}1
+	{Ф}{{\selectfont\char212}}1
+	{Х}{{\selectfont\char213}}1
+	{Ц}{{\selectfont\char214}}1
+	{Ч}{{\selectfont\char215}}1
+	{Ш}{{\selectfont\char216}}1
+	{Щ}{{\selectfont\char217}}1
+	{Ъ}{{\selectfont\char218}}1
+	{Ы}{{\selectfont\char219}}1
+	{Ь}{{\selectfont\char220}}1
+	{Э}{{\selectfont\char221}}1
+	{Ю}{{\selectfont\char222}}1
+	{Я}{{\selectfont\char223}}1
+}
+
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{datavisualization}
+\usetikzlibrary{datavisualization.formats.functions}
+
+\usepackage{graphicx}
+% Каталог иллюстраций: imgmode.tex (\usenormcontrolimgtrue / false)
+\ifusenormcontrolimg
+	\def\imgroot{img/normcontrol/}
+	\graphicspath{{img/normcontrol/}}
+\else
+	\def\imgroot{img/}
+	\graphicspath{{img/}}
+\fi
+% \IfFileExists не смотрит \graphicspath — проверяем полный путь
+\newcommand{\IfReportImgExists}[3]{%
+	\IfFileExists{\imgroot #1}{#2}{#3}%
+}
+% Всегда из img/ или img/normcontrol/ (не из report/diags/ и т.п.)
+\newcommand{\reportimg}[2][]{%
+	\includegraphics[#1]{\imgroot #2}%
+}
+
+\usepackage[justification=centering]{caption} % Настройка подписей float объектов
+\captionsetup[lstlisting]{%
+	singlelinecheck=false,
+	justification=raggedright,
+	position=top,
+	skip=6pt,
+	labelsep=endash,
+}
+
+\usepackage[unicode,pdftex]{hyperref} % Ссылки в pdf
+\hypersetup{hidelinks}
+
+\usepackage{csvsimple}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\termrow}[2]{%
+	\textbf{#1} & {\setlength{\parindent}{0pt}#2.} \\%
+	\noalign{\vspace{10pt}}%
+}
+
+\usepackage{xcolor}
+\usepackage{color} 
+
+% Главы 1--4: слева с красной строки; с главы 5 --- по центру
+\titlespacing*{\chapter}{0pt}{-40pt}{8pt}
+% \chapter* (реферат, содержание, определения): без отрицательного отступа --- иначе ломается верхнее поле 20 мм
+\titleformat{name=\chapter,numberless}[display]{%
+	\normalfont\large\bfseries
+	\leavevmode
+	\hbox to \textwidth{%
+		\hss
+		\hbox to 0pt{%
+			\hss
+			\hspace*{\dimexpr 0.5\paperwidth - 1in - \oddsidemargin - 0.5\textwidth\relax}%
+			##1\hss
+		}%
+		\hss
+	}%
+}{}{0pt}{}
+\titlespacing*{name=\chapter,numberless}{0pt}{0pt}{20pt}
+\titleformat{\chapter}[block]{%
+	\ifnum\value{chapter}<5\relax
+		\hspace*{\parindent}\LARGE\bfseries
+	\else
+		\filcenter\LARGE\bfseries
+	\fi
+}{%
+	\ifnum\value{chapter}<5\relax
+		\hspace*{\parindent}\thechapter
+	\else
+		\thechapter
+	\fi
+}{20pt}{}
+
+% section/subsection/subsubsection: красная строка + выравнивание по левому краю
+\newcommand{\secheadingpre}{%
+	\raggedright
+	\hyphenpenalty=10000\exhyphenpenalty=10000%
+	\doublehyphendemerits=10000\finalhyphendemerits=10000%
+}
+
+\titleformat{\section}[block]{\hspace*{\parindent}\Large\bfseries}{\hspace*{\parindent}\thesection}{20pt}{\secheadingpre}
+\titleformat{name=\section,numberless}[block]{\hspace*{\parindent}\Large\bfseries}{}{0pt}{\secheadingpre}
+\titleformat{\subsection}[block]{\hspace*{\parindent}\large\bfseries}{\hspace*{\parindent}\thesubsection}{20pt}{\secheadingpre}
+\titleformat{name=\subsection,numberless}[block]{\hspace*{\parindent}\large\bfseries}{}{0pt}{\secheadingpre}
+\titleformat{\subsubsection}[block]{\hspace*{\parindent}\bfseries}{}{0pt}{\secheadingpre}
+
+\makeatletter
+% Оглавление: без \vskip 0pt plus 0.2pt (иначе на стр. 7--8 верхнее поле ~21 мм).
+\def\@dottedtocline#1#2#3#4#5{%
+	\ifnum #1>\c@tocdepth \else
+		\vskip \z@
+		{\leftskip #2\relax \rightskip \@tocrmarg \parfillskip -\rightskip
+			\parindent #2\relax\@afterindenttrue
+			\interlinepenalty\@M
+			\leavevmode
+			\@tempdima #3\relax
+			\advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+			{#4}\nobreak
+			\leaders\hbox{$\m@th
+				\mkern \@dotsep mu\hbox{.}\mkern \@dotsep
+				mu$}\hfill
+			\nobreak
+			\hb@xt@\@pnumwidth{\hfil\normalfont\normalcolor #5%
+				\kern-\p@\kern\p@}%
+			\par}%
+	\fi}
+\renewcommand*{\l@chapter}[2]{%
+	\ifnum \c@tocdepth>\m@ne
+		\addpenalty{-\@highpenalty}%
+		\addvspace{1em}%
+		\@dottedtocline{0}{0pt}{1.5em}{\bfseries #1}{\bfseries #2}%
+	\fi}
+\makeatother
+
+\renewcommand*{\arraystretch}{1}

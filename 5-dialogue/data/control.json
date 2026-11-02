@@ -1,0 +1,17 @@
+{
+  "note": "Контрольные формулировки, написанные после настройки опорных слов и не использованные для неё. По ним оценивается обобщение на новые вопросы.",
+  "samples": [
+    {"text": "Расскажи, что такое кройтер.", "label": "domain"},
+    {"text": "Какие ликёры бывают на основе кофе?", "label": "domain"},
+    {"text": "Ты умеешь сравнивать ликёры?", "label": "abilities"},
+    {"text": "Какие команды ты понимаешь?", "label": "abilities"},
+    {"text": "Подбери мне что-нибудь ореховое.", "label": "recommend"},
+    {"text": "Какой ликёр подойдёт к мороженому?", "label": "recommend"},
+    {"text": "Midori и Malibu сильно отличаются?", "label": "compare"},
+    {"text": "Что горче: Averna или Montenegro?", "label": "compare"},
+    {"text": "Удали из базы Ponche Crema.", "label": "modify"},
+    {"text": "Поменяй страну у Amarula на ЮАР.", "label": "modify"},
+    {"text": "Сколько калорий в Baileys?", "label": "refuse"},
+    {"text": "Кто написал «Войну и мир»?", "label": "refuse"}
+  ]
+}

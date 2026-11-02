@@ -5,6 +5,10 @@
 % Колонки таблиц: выравнивание по левому краю (L) и мелкий шрифт для длинной таблицы (S)
 \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcolumntype{S}[1]{>{\scriptsize\raggedright\arraybackslash}p{#1}}
+\newcolumntype{F}[1]{>{\footnotesize\raggedright\arraybackslash}p{#1}}
+
+% В шаблоне ВКР главы с 5-й центрируются; здесь все главы-лабораторные оформлены одинаково
+\titleformat{\chapter}[block]{\hspace*{\parindent}\LARGE\bfseries}{\hspace*{\parindent}\thechapter}{20pt}{}
 
 \begin{document}
 
@@ -27,6 +31,7 @@
 \include{6-lr2}
 \include{7-lr3}
 \include{8-lr4}
+\include{8.5-lr5}
 \include{9-conclusion}
 \include{10-sources}
 \end{document}

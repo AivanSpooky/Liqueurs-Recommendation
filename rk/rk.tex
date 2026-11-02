@@ -1,0 +1,16 @@
+\documentclass[a4paper,14pt, unknownkeysallowed]{extreport}
+
+\input{1-nissettings}
+
+% Колонки таблиц: выравнивание по левому краю (L) и мелкий шрифт для длинной таблицы (S)
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{S}[1]{>{\scriptsize\raggedright\arraybackslash}p{#1}}
+
+\begin{document}
+
+\enablegostpagenumber
+
+\include{1-question1}
+\include{2-question2}
+\include{3-question3}
+\end{document}

@@ -1,0 +1,3 @@
+id,kind,text,gold,predicted,scores
+2.3,переформулировка,Можно через тебя купить ликёр?,abilities,refuse,abilities=1.5; refuse=3
+к10,контроль,Поменяй страну у Amarula на ЮАР.,modify,refuse,
